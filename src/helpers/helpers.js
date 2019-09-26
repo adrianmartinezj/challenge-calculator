@@ -1,11 +1,17 @@
 
 export function parseDelimiters(str) {
-    console.log('passed in string:', str);
     let delimiters = [",", "\\n"];
-    console.log('delimiters:', delimiters);
     const customDelimiterPatt = /^\/\/(.+)\\n/
     let customDelimiters = [...str.matchAll(customDelimiterPatt)];
-    console.log('customDelimiters:', customDelimiters);
+    const multipleDelimiterPatt = /[\[\]]/g
+    const tempCommaReplace = /\]\[/g
+    if (customDelimiters[0]){
+        let result = customDelimiters[0][1];
+        result = result.replace(tempCommaReplace, ',');
+        result = result.replace(multipleDelimiterPatt, '');
+        delimiters.push(...result.split(","));
+    }
+    return delimiters;
 }
 
 // single char 
@@ -15,3 +21,5 @@ export function parseDelimiters(str) {
 
 // custom delimiter any length
 // \/\/\[(\W+)\]\\n
+
+//[*][!!][r9r]\n11r9r22*33!!44
