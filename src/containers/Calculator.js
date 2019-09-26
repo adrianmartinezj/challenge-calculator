@@ -10,6 +10,7 @@ const Calculator = (props) => {
         console.log('Add clicked!', inputValue);
         let elements = parseDelimiters(inputValue);
         let result = addString(elements);
+        console.log('addition:', result);
         e.preventDefault();
     }
 
