@@ -14,12 +14,11 @@ export function parseDelimiters(str) {
     return delimiters;
 }
 
-// single char 
-// ^\/\/(.+)\\n
-
-// str.matchAll(regexp)
-
-// custom delimiter any length
-// \/\/\[(\W+)\]\\n
-
-//[*][!!][r9r]\n11r9r22*33!!44
+export function splitString(delimiters, str) {
+    let result = [str];
+    delimiters.forEach(element => {
+        str = str.replace(element, ',');
+    });
+    result = str.split(',');
+    return result;
+}
