@@ -17,12 +17,19 @@ export function parseDelimiters(str) {
 
 function splitString(delimiters, str) {
     let result = [str];
-    delimiters.forEach(element => {
-        str = str.replace(element, ',');
-    });
+    // delimiters.forEach(element => {
+    //     var re = new RegExp(element, "g");
+    //     console.log('re:', re)
+    //     str = str.replace(re, ',');
+    // });
+    // let re = new RegExp('[', ...delimiters, ']')
+    let re = new RegExp('+')
+    console.log('re:', re);
     result = str.split(',');
     return result;
 }
+
+//date.split(/[.,\/ -]/)
 
 export function addString(operands) {
     console.log('operands:', operands)
