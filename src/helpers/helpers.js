@@ -11,14 +11,34 @@ export function parseDelimiters(str) {
         result = result.replace(multipleDelimiterPatt, '');
         delimiters.push(...result.split(","));
     }
-    return delimiters;
+    let trimmedStr = str.replace(customDelimiterPatt, '');
+    return splitString(delimiters, trimmedStr);
 }
 
-export function splitString(delimiters, str) {
+function splitString(delimiters, str) {
     let result = [str];
     delimiters.forEach(element => {
         str = str.replace(element, ',');
     });
     result = str.split(',');
     return result;
+}
+
+export function addString(operands) {
+    console.log('operands:', operands)
+    let sum = 0;
+    operands.forEach(operand => {
+        sum += validateElement(operand)
+    });
+    console.log('sum:', sum)
+}
+
+
+function validateElement(element) {
+    let validated = 0;
+    let numberOnlyPatt = /^[0-9]+$/
+    if(numberOnlyPatt.test(element))
+        validated = parseInt(element, 10);
+    console.log('validated:', validated)
+    return validated;
 }

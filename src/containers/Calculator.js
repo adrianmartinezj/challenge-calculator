@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { parseDelimiters, splitString } from '../helpers/helpers';
+import { parseDelimiters, addString } from '../helpers/helpers';
 import CalculatorInput from '../components/CalculatorInput';
 
 const Calculator = (props) => {
@@ -8,8 +8,8 @@ const Calculator = (props) => {
 
     const handleAddClick = (e) => {
         console.log('Add clicked!', inputValue);
-        let delimiters = parseDelimiters(inputValue);
-        splitString(delimiters, inputValue);
+        let elements = parseDelimiters(inputValue);
+        let result = addString(elements);
         e.preventDefault();
     }
 
