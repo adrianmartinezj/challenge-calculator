@@ -2,14 +2,15 @@ import React from 'react';
 
 const calculatorInput = (props) => {
     const {
-        addClick
+        updateValue,
+        addSubmit,
     } = props;
 
     return (
-        <div>
-            <input />
-            <button onClick={addClick}>Add</button>
-        </div>
+        <form onSubmit={addSubmit}>
+            <input onChange={updateValue}/>
+            <button type="submit" onClick={addSubmit}>Add</button>
+        </form>
     );
 }
 
