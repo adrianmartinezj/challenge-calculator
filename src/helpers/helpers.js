@@ -26,7 +26,9 @@ function splitString(delimiters, str) {
     delimiters.forEach(element => {
         let delimiter = element;
         // We need to escape special characters in order to send to RegExp
-        if (/\W/g.test(element))
+        if (element === '\\n')
+            delimiter = '\\\\n'
+        else if (/\W/g.test(element))
             delimiter = element.match(/\W/g).map((el) => '\\' + el).join('')
         var re = new RegExp(delimiter, 'g');
         str = str.replace(re, ',');
@@ -38,22 +40,26 @@ function splitString(delimiters, str) {
 //date.split(/[.,\/ -]/)
 
 export function addString(operands) {
-    console.log('operands:', operands)
     let sum = 0;
+    let negativeElements = []
     // Iterate through each of our operands, returning 0 for invalid results
     operands.forEach(operand => {
         sum += validateElement(operand)
     });
+    console.log('negativeElements', negativeElements);
     return sum;
 }
 
 
-function validateElement(element) {
+function validateElement(element, negativeElements) {
+    console.log('element', element);
     let validated = 0;
-    let numberOnlyPatt = /^[0-9]+$/
+    const numberOnlyPatt = /^[0-9]+$/
+    const negativePatt = /^-[0-9]+$/
     // Check for anything that is a number, otherwise remain 0
     if(numberOnlyPatt.test(element))
         validated = parseInt(element, 10);
-    console.log('validated:', validated);
+    else if (negativePatt.test(element))
+        negativeElements.push(element)
     return validated;
 }

@@ -6,11 +6,12 @@ const Calculator = (props) => {
 
     const [inputValue, setInputValue] = useState("");
 
+    const [resultValue, setResultValue] = useState(0);
+
     const handleAddClick = (e) => {
         console.log('Add clicked!', inputValue);
         let elements = parseDelimiters(inputValue);
-        let result = addString(elements);
-        console.log('addition:', result);
+        setResultValue(addString(elements));
         e.preventDefault();
     }
 
@@ -23,6 +24,7 @@ const Calculator = (props) => {
         <CalculatorInput 
             addSubmit={handleAddClick}
             updateValue={handleInputChange}
+            resultValue={resultValue}
             />
     );
 }
