@@ -37,8 +37,6 @@ function splitString(delimiters, str) {
     return result;
 }
 
-//date.split(/[.,\/ -]/)
-
 export function addString(operands) {
     let sum = 0;
     let negativeElements = []
@@ -55,7 +53,6 @@ export function addString(operands) {
     return sum;
 }
 
-
 function validateElement(element) {
     console.log('element', element);
     let validated = 0;
@@ -63,8 +60,11 @@ function validateElement(element) {
     const numberOnlyPatt = /^[0-9]+$/
     const negativePatt = /^-[0-9]+$/
     // Check for anything that is a number, otherwise remain 0
-    if (numberOnlyPatt.test(element))
+    if (numberOnlyPatt.test(element)) {
         validated = parseInt(element, 10);
+        if (validated > 1000)
+            validated = 0;
+    }
     else if (negativePatt.test(element))
         negative = element;
     const result = { operand: validated, denied: negative}
