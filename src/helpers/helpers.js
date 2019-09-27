@@ -44,22 +44,29 @@ export function addString(operands) {
     let negativeElements = []
     // Iterate through each of our operands, returning 0 for invalid results
     operands.forEach(operand => {
-        sum += validateElement(operand)
+        let result = validateElement(operand)
+        if (result.denied !== '')
+            negativeElements.push(result.denied)
+        sum += result.operand;
     });
-    console.log('negativeElements', negativeElements);
+    if (negativeElements.length > 0) {
+        alert('Negative numbers detected: ' + negativeElements.join(','))
+    }
     return sum;
 }
 
 
-function validateElement(element, negativeElements) {
+function validateElement(element) {
     console.log('element', element);
     let validated = 0;
+    let negative = '';
     const numberOnlyPatt = /^[0-9]+$/
     const negativePatt = /^-[0-9]+$/
     // Check for anything that is a number, otherwise remain 0
-    if(numberOnlyPatt.test(element))
+    if (numberOnlyPatt.test(element))
         validated = parseInt(element, 10);
     else if (negativePatt.test(element))
-        negativeElements.push(element)
-    return validated;
+        negative = element;
+    const result = { operand: validated, denied: negative}
+    return result;
 }
