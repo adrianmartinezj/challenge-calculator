@@ -40,17 +40,24 @@ function splitString(delimiters, str) {
 export function addString(operands) {
     let sum = 0;
     let negativeElements = []
+    let formula = "";
     // Iterate through each of our operands, returning 0 for invalid results
     operands.forEach(operand => {
         let result = validateElement(operand)
         if (result.denied !== '')
             negativeElements.push(result.denied)
+        // Append to formula string
+        if (formula !== "")
+            formula += '+' + result.operand;
+        else
+            formula += result.operand;
         sum += result.operand;
     });
+    // Ensure there are no negatives. If there are, ignore and alert the user.
     if (negativeElements.length > 0) {
         alert('Negative numbers detected: ' + negativeElements.join(','))
     }
-    return sum;
+    return {sum: sum, formula: formula};
 }
 
 function validateElement(element) {
@@ -62,6 +69,7 @@ function validateElement(element) {
     // Check for anything that is a number, otherwise remain 0
     if (numberOnlyPatt.test(element)) {
         validated = parseInt(element, 10);
+        // Check for numbers greater than 1000
         if (validated > 1000)
             validated = 0;
     }
