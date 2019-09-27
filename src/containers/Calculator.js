@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { parseDelimiters, addString } from '../helpers/helpers';
 import CalculatorInput from '../components/CalculatorInput';
 import FormulaDisplay from '../components/FormulaDisplay';
+import UnitTester from '../components/UnitTester';
 
 const Calculator = (props) => {
 
@@ -35,6 +36,7 @@ const Calculator = (props) => {
             <FormulaDisplay 
                 formula={formulaValue}
                 />
+            <UnitTester />
         </div>
     );
 }
